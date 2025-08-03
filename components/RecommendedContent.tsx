@@ -230,7 +230,7 @@ export function RecommendedContent({ onPostClick, onLoginRequired }: Recommended
               className="bg-white rounded-xl p-5 border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
               onClick={() => onPostClick && onPostClick(post.id)}
             >
-              <div className="flex items-start space-x-4">
+              <div className="flex items-start space-x-3">
                 {/* 작성자 아바타 */}
                 <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-white text-sm font-medium">
@@ -239,7 +239,7 @@ export function RecommendedContent({ onPostClick, onLoginRequired }: Recommended
                 </div>
                 
                 {/* 게시물 내용 */}
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 pr-2">
                   {/* 작성자 정보 */}
                   <div className="flex items-center space-x-2 mb-3">
                     <p className="text-sm font-medium text-gray-900">{post.authorName || '익명'}</p>
@@ -302,7 +302,7 @@ export function RecommendedContent({ onPostClick, onLoginRequired }: Recommended
                 
                 {/* 썸네일 이미지 */}
                 {post.imageUrls && post.imageUrls.length > 0 && (
-                  <div className="w-18 h-18 bg-gray-200 rounded-xl flex-shrink-0 overflow-hidden">
+                  <div className="w-16 h-16 bg-gray-200 rounded-lg flex-shrink-0 overflow-hidden">
                     <img
                       src={post.imageUrls[0]}
                       alt={`${post.authorName}의 게시물 썸네일`}

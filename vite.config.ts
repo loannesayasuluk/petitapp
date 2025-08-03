@@ -32,7 +32,8 @@ export default defineConfig(({ command, mode }) => {
   },
   server: {
     port: 3000,
-    open: true
+    open: true,
+    host: '0.0.0.0'  // 네트워크 접속 허용
   },
   preview: {
     port: 4173,
