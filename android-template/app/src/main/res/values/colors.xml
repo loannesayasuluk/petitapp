@@ -1,0 +1,26 @@
+<resources>
+    <!-- Petit Natural Luxury Color System -->
+    <color name="primary_color">#E5B876</color>
+    <color name="primary_variant">#D5A666</color>
+    <color name="secondary_color">#EAE0D5</color>
+    <color name="background_color">#FAF8F1</color>
+    <color name="surface_color">#FFFFFF</color>
+    <color name="on_primary">#212529</color>
+    <color name="on_secondary">#4E4A4A</color>
+    <color name="on_background">#212529</color>
+    <color name="on_surface">#4E4A4A</color>
+    
+    <!-- 시스템 색상 -->
+    <color name="status_bar_color">@color/background_color</color>
+    <color name="navigation_bar_color">@color/background_color</color>
+    
+    <!-- 스플래시 색상 -->
+    <color name="splash_background">@color/background_color</color>
+    <color name="splash_icon">@color/primary_color</color>
+    
+    <!-- 다크 모드 -->
+    <color name="primary_color_dark">#E5B876</color>
+    <color name="background_color_dark">#2A2520</color>
+    <color name="surface_color_dark">#332E26</color>
+    <color name="on_background_dark">#F5F1E8</color>
+</resources>

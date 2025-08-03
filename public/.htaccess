@@ -1,0 +1,92 @@
+# PWA Builder 호환성을 위한 Apache 설정
+# Figma 배포 환경에서 manifest.json 인식 개선
+
+# Manifest.json에 올바른 Content-Type 설정
+<Files "manifest.json">
+    Header set Content-Type "application/json"
+    Header set Cache-Control "max-age=3600"
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type"
+</Files>
+
+# Service Worker에 올바른 Content-Type 설정
+<Files "sw.js">
+    Header set Content-Type "application/javascript"
+    Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+    Header set Access-Control-Allow-Origin "*"
+</Files>
+
+# PWA 관련 파일들에 CORS 헤더 추가
+<FilesMatch "\.(json|js|png|svg|ico|webmanifest)$">
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, OPTIONS"
+</FilesMatch>
+
+# Manifest 관련 확장자들
+<Files "*.webmanifest">
+    Header set Content-Type "application/manifest+json"
+</Files>
+
+# 브라우저 캐싱 최적화
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Manifest는 1시간 캐싱
+    ExpiresByType application/json "access plus 1 hour"
+    ExpiresByType application/manifest+json "access plus 1 hour"
+    
+    # Service Worker는 캐싱 안함
+    ExpiresByType application/javascript "access plus 0 seconds"
+    
+    # 아이콘들은 1주일 캐싱
+    ExpiresByType image/png "access plus 1 week"
+    ExpiresByType image/svg+xml "access plus 1 week"
+    ExpiresByType image/x-icon "access plus 1 week"
+</IfModule>
+
+# 압축 설정
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/manifest+json
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE text/javascript
+</IfModule>
+
+# MIME 타입 추가 설정
+<IfModule mod_mime.c>
+    AddType application/json .json
+    AddType application/manifest+json .webmanifest
+    AddType application/javascript .js
+    AddType image/svg+xml .svg
+</IfModule>
+
+# 보안 헤더 (선택사항)
+<IfModule mod_headers.c>
+    # PWA 관련 보안 헤더
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # PWA Builder가 접근할 수 있도록 CORS 허용
+    SetEnvIf Origin "^https://www\.pwabuilder\.com$" ALLOW_ORIGIN=$0
+    Header set Access-Control-Allow-Origin %{ALLOW_ORIGIN}e env=ALLOW_ORIGIN
+</IfModule>
+
+# URL 리라이팅 (SPA 지원)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # manifest.json 요청 처리
+    RewriteRule ^manifest\.json$ /manifest.json [L,QSA]
+    
+    # Service Worker 요청 처리
+    RewriteRule ^sw\.js$ /sw.js [L,QSA]
+    
+    # 정적 파일이 아닌 요청은 index.html로 라우팅 (SPA)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !^/manifest\.json$
+    RewriteCond %{REQUEST_URI} !^/sw\.js$
+    RewriteRule . /index.html [L]
+</IfModule>

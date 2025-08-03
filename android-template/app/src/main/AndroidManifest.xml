@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 인터넷 권한 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
+    <!-- 파일 업로드를 위한 권한 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    
+    <!-- 카메라 권한 (사진 촬영용) -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    
+    <!-- 진동 권한 (알림용) -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Petit"
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:targetApi="31">
+
+        <!-- 스플래시 스크린 테마 -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Petit.SplashScreen">
+            
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            
+            <!-- TWA Intent Filter -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="your-petit-app.vercel.app" />
+            </intent-filter>
+        </activity>
+
+        <!-- TWA Service -->
+        <service
+            android:name="com.google.androidbrowserhelper.trusted.TwaLauncherService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.support.customtabs.trusted.TRUSTED_WEB_ACTIVITY_SERVICE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
+        <!-- 앱 단축키 -->
+        <meta-data android:name="android.app.shortcuts"
+            android:resource="@xml/shortcuts" />
+
+        <!-- Digital Asset Links -->
+        <meta-data
+            android:name="asset_statements"
+            android:resource="@string/asset_statements" />
+
+        <!-- TWA 설정 -->
+        <meta-data
+            android:name="twa_generator"
+            android:value="PWABuilder" />
+            
+        <meta-data
+            android:name="default_url"
+            android:value="https://your-petit-app.vercel.app" />
+            
+        <meta-data
+            android:name="twa_display_mode"
+            android:value="standalone" />
+            
+        <meta-data
+            android:name="twa_orientation"
+            android:value="portrait" />
+            
+        <meta-data
+            android:name="twa_theme_color"
+            android:resource="@color/primary_color" />
+            
+        <meta-data
+            android:name="twa_navigation_bar_color"
+            android:resource="@color/background_color" />
+            
+        <meta-data
+            android:name="twa_status_bar_color"
+            android:resource="@color/background_color" />
+
+    </application>
+</manifest>

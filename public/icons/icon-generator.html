@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petit PWA 아이콘 생성기</title>
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background: #FAF8F1;
+            color: #212529;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #E5B876;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .icon-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .icon-item {
+            text-align: center;
+            padding: 15px;
+            background: #FAF8F1;
+            border-radius: 8px;
+            border: 2px solid #E5B876;
+        }
+        
+        .icon-sample {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #E5B876 0%, #D5A666 100%);
+            border-radius: 16px;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(229, 184, 118, 0.3);
+        }
+        
+        .download-section {
+            background: #EAE0D5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            background: #E5B876;
+            color: #212529;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #D5A666;
+        }
+        
+        .instructions {
+            background: #F5F5F5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .size-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .size-item {
+            background: white;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+            border: 1px solid #E5B876;
+        }
+        
+        canvas {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐾 Petit PWA 아이콘 생성기</h1>
+        
+        <div class="instructions">
+            <h3>📋 사용 방법</h3>
+            <p>1. 아래 "아이콘 생성" 버튼을 클릭하세요</p>
+            <p>2. 생성된 아이콘들을 각각 다운로드하세요</p>
+            <p>3. 파일명을 정확히 맞춰서 <code>/public/icons/</code> 폴더에 저장하세요</p>
+        </div>
+        
+        <div class="icon-preview">
+            <div class="icon-item">
+                <div class="icon-sample">P</div>
+                <div>기본 아이콘</div>
+            </div>
+        </div>
+        
+        <div class="download-section">
+            <h3>🔧 아이콘 생성 및 다운로드</h3>
+            <button class="btn" onclick="generateAllIcons()">모든 아이콘 생성</button>
+            <div id="download-links"></div>
+        </div>
+        
+        <div class="instructions">
+            <h3>📐 필요한 아이콘 크기</h3>
+            <div class="size-grid">
+                <div class="size-item">72x72</div>
+                <div class="size-item">96x96</div>
+                <div class="size-item">128x128</div>
+                <div class="size-item">144x144</div>
+                <div class="size-item">152x152</div>
+                <div class="size-item">192x192</div>
+                <div class="size-item">384x384</div>
+                <div class="size-item">512x512</div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>🎨 디자인 가이드</h3>
+            <p><strong>컬러:</strong> 골든 오커(#E5B876) 메인, 크림 화이트(#FAF8F1) 배경</p>
+            <p><strong>스타일:</strong> Natural Luxury 컨셉, 둥근 모서리</p>
+            <p><strong>로고:</strong> "P" 또는 "Petit" 텍스트 사용</p>
+        </div>
+    </div>
+    
+    <canvas id="icon-canvas"></canvas>
+    
+    <script>
+        const iconSizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        const primaryColor = '#E5B876';
+        const secondaryColor = '#D5A666';
+        const textColor = '#212529';
+        
+        function generateIcon(size) {
+            const canvas = document.getElementById('icon-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = size;
+            canvas.height = size;
+            
+            // 배경 그라디언트
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, primaryColor);
+            gradient.addColorStop(1, secondaryColor);
+            
+            // 배경
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // 둥근 모서리 (iOS 스타일)
+            ctx.globalCompositeOperation = 'destination-in';
+            ctx.beginPath();
+            ctx.roundRect(0, 0, size, size, size * 0.22);
+            ctx.fill();
+            
+            // 다시 그리기 모드로 복원
+            ctx.globalCompositeOperation = 'source-over';
+            
+            // 텍스트 (P 또는 Petit)
+            ctx.fillStyle = textColor;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            if (size >= 192) {
+                // 큰 아이콘: "Petit" 표시
+                ctx.font = `bold ${size * 0.15}px 'Pretendard', sans-serif`;
+                ctx.fillText('Petit', size / 2, size / 2);
+            } else {
+                // 작은 아이콘: "P" 표시
+                ctx.font = `bold ${size * 0.5}px 'Pretendard', sans-serif`;
+                ctx.fillText('P', size / 2, size / 2);
+            }
+            
+            // 그림자 효과 (선택사항)
+            if (size >= 144) {
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+                ctx.shadowBlur = size * 0.02;
+                ctx.shadowOffsetY = size * 0.01;
+            }
+            
+            return canvas.toDataURL('image/png');
+        }
+        
+        function downloadIcon(dataUrl, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = dataUrl;
+            link.click();
+        }
+        
+        function generateAllIcons() {
+            const downloadContainer = document.getElementById('download-links');
+            downloadContainer.innerHTML = '<h4>생성된 아이콘들:</h4>';
+            
+            iconSizes.forEach(size => {
+                const dataUrl = generateIcon(size);
+                const filename = `icon-${size}x${size}.png`;
+                
+                const btn = document.createElement('button');
+                btn.className = 'btn';
+                btn.textContent = `${size}x${size} 다운로드`;
+                btn.onclick = () => downloadIcon(dataUrl, filename);
+                
+                downloadContainer.appendChild(btn);
+            });
+            
+            // 추가 아이콘들
+            const additionalIcons = [
+                { size: 96, name: 'write-shortcut.png', text: '✏️' },
+                { size: 96, name: 'community-shortcut.png', text: '👥' }
+            ];
+            
+            additionalIcons.forEach(icon => {
+                const canvas = document.getElementById('icon-canvas');
+                const ctx = canvas.getContext('2d');
+                
+                canvas.width = icon.size;
+                canvas.height = icon.size;
+                
+                // 배경
+                const gradient = ctx.createLinearGradient(0, 0, icon.size, icon.size);
+                gradient.addColorStop(0, primaryColor);
+                gradient.addColorStop(1, secondaryColor);
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, icon.size, icon.size);
+                
+                // 둥근 모서리
+                ctx.globalCompositeOperation = 'destination-in';
+                ctx.beginPath();
+                ctx.roundRect(0, 0, icon.size, icon.size, icon.size * 0.22);
+                ctx.fill();
+                
+                ctx.globalCompositeOperation = 'source-over';
+                
+                // 이모지 텍스트
+                ctx.fillStyle = textColor;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.font = `${icon.size * 0.4}px 'Pretendard', sans-serif`;
+                ctx.fillText(icon.text, icon.size / 2, icon.size / 2);
+                
+                const dataUrl = canvas.toDataURL('image/png');
+                
+                const btn = document.createElement('button');
+                btn.className = 'btn';
+                btn.textContent = `${icon.name} 다운로드`;
+                btn.onclick = () => downloadIcon(dataUrl, icon.name);
+                
+                downloadContainer.appendChild(btn);
+            });
+        }
+        
+        // 페이지 로드 시 미리보기 생성
+        window.onload = function() {
+            const previewIcon = generateIcon(72);
+            // 미리보기 업데이트는 여기서 할 수 있습니다
+        };
+    </script>
+</body>
+</html>

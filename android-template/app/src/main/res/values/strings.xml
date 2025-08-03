@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Petit</string>
+    <string name="app_description">반려동물 커뮤니티</string>
+    
+    <!-- Digital Asset Links -->
+    <string name="asset_statements">
+        [{
+            \"relation\": [\"delegate_permission/common.handle_all_urls\"],
+            \"target\": {
+                \"namespace\": \"web\",
+                \"site\": \"https://your-petit-app.vercel.app\"
+            }
+        }]
+    </string>
+    
+    <!-- 단축키 -->
+    <string name="shortcut_write_short">글쓰기</string>
+    <string name="shortcut_write_long">새 게시물 작성</string>
+    <string name="shortcut_community_short">커뮤니티</string>
+    <string name="shortcut_community_long">커뮤니티 둘러보기</string>
+    
+    <!-- 접근성 -->
+    <string name="content_description_logo">Petit 로고</string>
+    <string name="content_description_menu">메뉴</string>
+    <string name="content_description_search">검색</string>
+    <string name="content_description_notification">알림</string>
+    <string name="content_description_bookmark">북마크</string>
+</resources>

@@ -1,0 +1,63 @@
+{
+  "name": "petit-app",
+  "version": "1.0.0",
+  "description": "Petit 펫 커뮤니티 앱",
+  "main": "App.tsx",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loannesayasuluk/petitapp.git"
+  },
+  "homepage": "https://github.com/loannesayasuluk/petitapp#readme",
+  "bugs": {
+    "url": "https://github.com/loannesayasuluk/petitapp/issues"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "firebase",
+    "pet",
+    "community",
+    "tailwindcss"
+  ],
+  "author": "Petit Team",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "echo 'Linting skipped - no ESLint config'",
+    "lint:fix": "echo 'Lint fix skipped - no ESLint config'",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "pwa:test": "node scripts/test-pwa.js",
+    "pwa:icons": "echo '🎨 아이콘 생성: /public/icons/icon-generator.html 파일을 브라우저에서 열어주세요'",
+    "pwa:build": "npm run build && npm run pwa:test",
+    "pwa:check": "node scripts/test-pwa-builder.js",
+    "deploy:vercel": "npm run build && vercel --prod"
+  },
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.4",
+    "@radix-ui/react-slot": "^1.0.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "firebase": "^10.0.0",
+    "framer-motion": "^12.23.12",
+    "lucide-react": "^0.263.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^1.14.0",
+    "terser": "^5.43.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.0.0",
+    "vite": "^4.4.0"
+  }
+}
