@@ -143,6 +143,14 @@
   "background_sync": {
     "periodic_sync": {
       "min_period": 86400
+    },
+    "sync": {
+      "tags": ["background-sync"]
     }
-  }
+  },
+  "scope_extensions": [
+    {
+      "origin": "https://petitapp.vercel.app"
+    }
+  ]
 }

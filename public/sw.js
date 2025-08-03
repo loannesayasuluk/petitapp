@@ -41,3 +41,44 @@ function doBackgroundSync() {
   console.log('Background sync triggered');
   return Promise.resolve();
 }
+
+// Push notification handling
+self.addEventListener('push', event => {
+  const options = {
+    body: event.data ? event.data.text() : '새로운 알림이 있습니다!',
+    icon: '/icons/android/android-launchericon-192-192.png',
+    badge: '/icons/android/android-launchericon-48-48.png',
+    vibrate: [100, 50, 100],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: 1
+    },
+    actions: [
+      {
+        action: 'explore',
+        title: '확인하기',
+        icon: '/icons/android/android-launchericon-48-48.png'
+      },
+      {
+        action: 'close',
+        title: '닫기',
+        icon: '/icons/android/android-launchericon-48-48.png'
+      }
+    ]
+  };
+
+  event.waitUntil(
+    self.registration.showNotification('Petit', options)
+  );
+});
+
+// Notification click handling
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+
+  if (event.action === 'explore') {
+    event.waitUntil(
+      clients.openWindow('/')
+    );
+  }
+});
