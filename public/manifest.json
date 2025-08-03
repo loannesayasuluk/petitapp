@@ -138,5 +138,11 @@
   },
   "launch_handler": {
     "client_mode": "navigate-existing"
+  },
+  "iarc_rating_id": "e84b072d-71b3-4d3e-8ae4-d0188ad7ecc1",
+  "background_sync": {
+    "periodic_sync": {
+      "min_period": 86400
+    }
   }
 }
