@@ -3,29 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="쁘띠 - 반려동물 커뮤니티 앱. 모든 종류의 반려동물과 예비 반려인을 위한 정보 공유 및 소셜 네트워킹 플랫폼" />
-    <meta name="keywords" content="반려동물, 펫, 커뮤니티, 쁘띠, Petit, 반려인, 애완동물" />
+    <meta name="description" content="?�띠 - 반려?�물 커�??�티 ?? 모든 종류??반려?�물�??�비 반려?�을 ?�한 ?�보 공유 �??�셜 ?�트?�킹 ?�랫?? />
+    <meta name="keywords" content="반려?�물, ?? 커�??�티, ?�띠, Petit, 반려?? ?�완?�물" />
     <meta name="author" content="Petit Team" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://petitapp.vercel.app/" />
-    <meta property="og:title" content="쁘띠 - 반려동물 커뮤니티" />
-    <meta property="og:description" content="모든 종류의 반려동물과 예비 반려인을 위한 정보 공유 및 소셜 네트워킹 플랫폼" />
+    <meta property="og:title" content="?�띠 - 반려?�물 커�??�티" />
+    <meta property="og:description" content="모든 종류??반려?�물�??�비 반려?�을 ?�한 ?�보 공유 �??�셜 ?�트?�킹 ?�랫?? />
     <meta property="og:image" content="/og-image.png" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://petitapp.vercel.app/" />
-    <meta property="twitter:title" content="쁘띠 - 반려동물 커뮤니티" />
-    <meta property="twitter:description" content="모든 종류의 반려동물과 예비 반려인을 위한 정보 공유 및 소셜 네트워킹 플랫폼" />
+    <meta property="twitter:title" content="?�띠 - 반려?�물 커�??�티" />
+    <meta property="twitter:description" content="모든 종류??반려?�물�??�비 반려?�을 ?�한 ?�보 공유 �??�셜 ?�트?�킹 ?�랫?? />
     <meta property="twitter:image" content="/og-image.png" />
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     
-    <!-- PWA 설정 -->
+    <!-- PWA ?�정 -->
     <link rel="manifest" href="/manifest.json" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,13 +34,13 @@
     <meta name="msapplication-TileColor" content="#E5B876" />
     <meta name="msapplication-config" content="/browserconfig.xml" />
     
-    <!-- PWA Builder 호환성을 위한 추가 메타태그 -->
+    <!-- PWA Builder ?�환?�을 ?�한 추�? 메�??�그 -->
     <meta name="theme-color" content="#E5B876" />
     <meta name="application-name" content="Petit" />
     <meta name="msapplication-starturl" content="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover" />
     
-    <!-- iOS 아이콘 -->
+    <!-- iOS ?�이�?-->
     <link rel="apple-touch-icon" sizes="57x57" href="/icons/android/android-launchericon-48-48.png" />
     <link rel="apple-touch-icon" sizes="60x60" href="/icons/android/android-launchericon-48-48.png" />
     <link rel="apple-touch-icon" sizes="72x72" href="/icons/android/android-launchericon-72-72.png" />
@@ -51,7 +51,7 @@
     <link rel="apple-touch-icon" sizes="152x152" href="/icons/android/android-launchericon-192-192.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/android/android-launchericon-192-192.png" />
     
-    <!-- Windows 타일 -->
+    <!-- Windows ?�??-->
     <meta name="msapplication-TileImage" content="/icons/android/android-launchericon-144-144.png" />
     <meta name="msapplication-square70x70logo" content="/icons/android/android-launchericon-72-72.png" />
     <meta name="msapplication-square150x150logo" content="/icons/android/android-launchericon-144-144.png" />
@@ -65,67 +65,67 @@
     <!-- Pretendard Font -->
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
     
-    <title>쁘띠 - 반려동물 커뮤니티</title>
+    <title>?�띠 - 반려?�물 커�??�티</title>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/main.js"></script>
+    <script type="module" src="/main.tsx"></script>
     
-    <!-- PWA Fallback 스크립트 (PWA Builder 호환성) -->
+    <!-- PWA Fallback ?�크립트 (PWA Builder ?�환?? -->
     <script src="/pwa-fallback.js"></script>
     
-    <!-- Service Worker 등록 -->
+    <!-- Service Worker ?�록 -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js')
             .then((registration) => {
-              console.log('✅ Service Worker 등록 성공:', registration.scope);
+              console.log('??Service Worker ?�록 ?�공:', registration.scope);
               
-              // 업데이트 확인
+              // ?�데?�트 ?�인
               registration.addEventListener('updatefound', () => {
                 const newWorker = registration.installing;
                 newWorker.addEventListener('statechange', () => {
                   if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                    console.log('🔄 새로운 버전이 사용 가능합니다. 페이지를 새로고침하세요.');
+                    console.log('?�� ?�로??버전???�용 가?�합?�다. ?�이지�??�로고침?�세??');
                   }
                 });
               });
             })
             .catch((error) => {
-              console.error('❌ Service Worker 등록 실패:', error);
+              console.error('??Service Worker ?�록 ?�패:', error);
             });
         });
       }
 
-      // PWA 설치 프롬프트
+      // PWA ?�치 ?�롬?�트
       let deferredPrompt;
       window.addEventListener('beforeinstallprompt', (e) => {
-        console.log('📱 PWA 설치 가능');
+        console.log('?�� PWA ?�치 가??);
         e.preventDefault();
         deferredPrompt = e;
         
-        // 사용자에게 설치 안내 표시 (선택사항)
+        // ?�용?�에�??�치 ?�내 ?�시 (?�택?�항)
         showInstallBanner();
       });
 
       window.addEventListener('appinstalled', (evt) => {
-        console.log('🎉 PWA 설치 완료');
+        console.log('?�� PWA ?�치 ?�료');
         deferredPrompt = null;
       });
 
       function showInstallBanner() {
-        // 설치 배너 표시 로직 (필요시 구현)
-        console.log('💡 앱을 홈 화면에 추가할 수 있습니다!');
+        // ?�치 배너 ?�시 로직 (?�요??구현)
+        console.log('?�� ?�을 ???�면??추�??????�습?�다!');
       }
 
-      // 오프라인 상태 감지
+      // ?�프?�인 ?�태 감�?
       window.addEventListener('online', () => {
-        console.log('🌐 온라인 상태');
+        console.log('?�� ?�라???�태');
       });
 
       window.addEventListener('offline', () => {
-        console.log('📴 오프라인 상태');
+        console.log('?�� ?�프?�인 ?�태');
       });
     </script>
   </body>
