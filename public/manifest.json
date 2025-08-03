@@ -118,8 +118,6 @@
   "related_applications": [],
   "prefer_related_applications": false,
   "id": "/",
-  "scope": "/",
-  "start_url": "/",
   "display_override": ["fullscreen", "window-controls-overlay", "standalone"],
   "edge_side_panel": {
     "preferred_width": 400

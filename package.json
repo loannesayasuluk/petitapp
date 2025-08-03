@@ -1,6 +1,7 @@
 {
   "name": "petit-app",
   "version": "1.0.0",
+  "type": "module",
   "description": "Petit 펫 커뮤니티 앱",
   "main": "App.tsx",
   "repository": {

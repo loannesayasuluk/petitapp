@@ -21,11 +21,22 @@ export default defineConfig(({ command, mode }) => {
     outDir: 'dist',
     sourcemap: false,
     minify: 'terser',
+    chunkSizeWarningLimit: 1000, // 청크 크기 경고 임계값을 1MB로 증가
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          firebase: ['firebase/app', 'firebase/auth', 'firebase/firestore']
+        manualChunks: (id) => {
+          // Firebase 관련 모듈들을 별도 청크로 분리
+          if (id.includes('firebase')) {
+            return 'firebase'
+          }
+          // React 관련 모듈들
+          if (id.includes('react') || id.includes('react-dom')) {
+            return 'vendor'
+          }
+          // 기타 라이브러리들
+          if (id.includes('node_modules')) {
+            return 'vendor'
+          }
         }
       }
     }
