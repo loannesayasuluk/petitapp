@@ -106,25 +106,13 @@
       "name": "글쓰기",
       "short_name": "글쓰기",
       "description": "새 게시물 작성",
-      "url": "/?action=write",
-      "icons": [
-        {
-          "src": "/icons/write-shortcut.png",
-          "sizes": "96x96"
-        }
-      ]
+      "url": "/?action=write"
     },
     {
       "name": "커뮤니티",
       "short_name": "커뮤니티", 
       "description": "커뮤니티 둘러보기",
-      "url": "/?tab=community",
-      "icons": [
-        {
-          "src": "/icons/community-shortcut.png",
-          "sizes": "96x96"
-        }
-      ]
+      "url": "/?tab=community"
     }
   ],
   "related_applications": [],
