@@ -74,7 +74,8 @@
           "value": "nosniff"
         }
       ]
-    }
+    },
+
   ],
   "env": {
     "NODE_ENV": "production"
