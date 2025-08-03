@@ -3,7 +3,7 @@
   "short_name": "Petit",
   "description": "모든 종류의 반려동물 소유자와 예비 소유자들을 위한 정보 공유 및 소셜 네트워킹 플랫폼",
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#FAF8F1",
   "theme_color": "#E5B876",
   "orientation": "portrait-primary",
@@ -120,7 +120,7 @@
   "id": "/",
   "scope": "/",
   "start_url": "/",
-  "display_override": ["window-controls-overlay", "standalone"],
+  "display_override": ["fullscreen", "window-controls-overlay", "standalone"],
   "edge_side_panel": {
     "preferred_width": 400
   },
