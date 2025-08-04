@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 interface UnifiedLoginPromptProps {
   onClose: () => void;
-  trigger: 'notification' | 'bookmark' | 'write' | 'profile' | 'general';
+  trigger: 'notification' | 'bookmark' | 'write' | 'profile' | 'general' | 'chat';
   isFullScreen?: boolean;
 }
 
@@ -57,6 +57,11 @@ export function UnifiedLoginPrompt({ onClose, trigger, isFullScreen = false }: U
         return {
           title: '프로필을 보려면 로그인하세요',
           description: '개인화된 펫 라이프를 경험해보세요!'
+        };
+      case 'chat':
+        return {
+          title: '채팅을 사용하려면 로그인하세요',
+          description: '다른 반려인들과 실시간으로 소통하고 유용한 정보를 나누어보세요!'
         };
       default:
         return {
